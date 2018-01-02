@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Goals from './Goals';
 import './App.css';
 
@@ -12,31 +11,40 @@ class App extends Component {
         }
     }
 
-    onChange = (event)=> {
+    onChange = (event) => {
         this.setState({term: event.target.value});
     };
 
-    onSubmit = (event) => {
-        event.preventDefault();
-        console.log([...this.state.items, this.state.term]);
-        this.setState({
-            term:'',
-            items:[...this.state.items, this.state.term]
-        });
+    onKeyDown = (event) => {
+      if(event.keyCode != 13){
+        return;
+      }
+      event.preventDefault();
+
+      const newGoal = this.state.term.trim();
+
+        if(newGoal){
+          this.setState({
+              term:'',
+              items:[...this.state.items, newGoal]
+          });
+        }
+    }
+
+    onRemove = (i) => {
+      let result =this.state.items.slice().filter((item,index) => index != i);
+      this.setState({
+        items: result
+      });
     }
 
   render() {
       return (
-          <div>
-            <form className="App" onSubmit={this.onSubmit}>
-              <input value={this.state.term} onChange={this.onChange}/>
-              <button> Submit</button>
-            </form>
+          <div className="App">
+              <input value={this.state.term} onChange={this.onChange} onKeyDown={this.onKeyDown}/>
 
-              <Goals items={this.state.items}/>
-
-              </div>
-
+              <Goals goals={this.state.items} onRemove={(i) => this.onRemove(i)}/>
+          </div>
     );
   }
 }
