@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import Goals from './Goals';
 import './App.css';
+import GoalService from './services/GoalServie'
 
 class App extends Component {
     constructor(props) {
         super(props);
+        this.goalsService = new GoalService(".");
         this.state = {
             term: '',
             items: []
-        }
+        };
+
     }
+
+    componentDidMount() {
+        let newItems = this.goalsService.getGoals();
+        this.setState({ items: newItems})
+
+    };
 
     onChange = (event) => {
         this.setState({term: event.target.value});
     };
 
     onKeyDown = (event) => {
-      if(event.keyCode != 13){
+      if(event.keyCode !== 13){
         return;
       }
+
       event.preventDefault();
 
       const newGoal = this.state.term.trim();
@@ -28,11 +38,13 @@ class App extends Component {
               term:'',
               items:[...this.state.items, newGoal]
           });
+
+            this.goalsService.updateGoals(newGoal);
         }
     }
 
     onRemove = (i) => {
-      let result =this.state.items.slice().filter((item,index) => index != i);
+      let result =this.state.items.slice().filter((item,index) => index !== i);
       this.setState({
         items: result
       });
