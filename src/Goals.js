@@ -6,12 +6,15 @@ class Goals extends Component{
 
   render() {
     return (
-            <ul>
+            <ul className="list-group">
+            <a href="#" className="list-group-item disabled">
+            current goals
+        </a>
             {
                 this.props.goals.map((item, index) =>
-                (<li key={index}>{item}
-                  <button onClick={(event)=>this.props.onRemove(index)}>X</button>
-                </li>) )
+                                     (<a href="#" className="list-group-item" key={index}>{item}
+                                      <a className="glyphicon glyphicon-minus" onClick={(event)=>this.props.onRemove(index)}></a>
+                </a>) )
             }
         </ul>
     );

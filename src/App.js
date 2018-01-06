@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Goals from './Goals';
 import './App.css';
-import GoalService from './services/GoalServie'
+import GoalService from './services/GoalServie';
+import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
     constructor(props) {
@@ -53,7 +54,34 @@ class App extends Component {
   render() {
       return (
           <div className="App">
-              <input value={this.state.term} onChange={this.onChange} onKeyDown={this.onKeyDown}/>
+              <Navbar inverse fixedTop>
+                   <Grid>
+              <Navbar.Header>
+              <Navbar.Brand>
+                 <a href="/">Sprint Goals</a>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+              </Navbar.Header>
+              </Grid>
+              </Navbar>
+              <Jumbotron>
+              <Grid>
+              <div>
+              <div className="row">
+              </div>
+              <div className="col-lg-6">
+              <div className="input-group">
+              <span className="input-group-addon">
+              <input type="checkbox"/>
+              </span>
+
+              <input className="form-control" value={this.state.term} onChange={this.onChange} onKeyDown={this.onKeyDown} palceholder="new goal"/>
+              </div>
+              </div>
+              </div>
+              </Grid>
+              </Jumbotron>
+
 
               <Goals goals={this.state.items} onRemove={(i) => this.onRemove(i)}/>
           </div>
