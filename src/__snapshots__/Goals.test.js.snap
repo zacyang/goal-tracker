@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gaols snapshot test 1`] = `
+<ul
+  className="list-group"
+>
+  <a
+    className="list-group-item disabled"
+    href="#"
+  >
+    current goals
+  </a>
+</ul>
+`;

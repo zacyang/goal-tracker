@@ -1,20 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Goals from './Goals.js';
+import renderer from 'react-test-renderer';
 
-describe("on init", () => {
-    let component;
-    let items = [];
-    let div;
-    function onRemove (index) { console. log ("onremove called", index);}
+test('Default snapshot test', ()=> {
+    const items = [];
+   const component = renderer.create(<Goals goals={items}> </Goals>, );
+   let tree = component.toJSON();
 
-    beforeEach(()=>{
-         div = document.createElement('div');
-        ReactDOM.render(<Goals goals={items} />, div);
-    });
-
-    it("haha",()=>{
-        expect(1).toBe(1);
-    })
-
+   expect(tree).toMatchSnapshot();
 });

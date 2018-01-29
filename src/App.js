@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Goals from './Goals';
-import './App.css';
+// import './App.css';
 import GoalService from './services/GoalServie';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
 
@@ -21,11 +21,11 @@ class App extends Component {
 
     };
 
-    onChange = (event) => {
+    onChange(event){
         this.setState({term: event.target.value});
     };
 
-    onKeyDown = (event) => {
+    onKeyDown (event){
       if(event.keyCode !== 13){
         return;
       }
@@ -44,7 +44,7 @@ class App extends Component {
         }
     }
 
-    onRemove = (i) => {
+    onRemove (i) {
       let result =this.state.items.slice().filter((item,index) => index !== i);
       this.setState({
         items: result
